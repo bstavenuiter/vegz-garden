@@ -9,7 +9,8 @@ import TimelineView from './components/TimelineView.vue'
 import SowingCalendar from './components/SowingCalendar.vue'
 
 type Tab = 'plan' | 'jaar' | 'kalender'
-const tab = ref<Tab>('plan')
+// The plan editor needs a big screen; on a phone open the sowing calendar.
+const tab = ref<Tab>(window.matchMedia('(max-width: 700px)').matches ? 'kalender' : 'plan')
 const TABS: { id: Tab; label: string }[] = [
   { id: 'plan', label: 'Tuinplan' },
   { id: 'jaar', label: 'Jaarplanning' },
@@ -133,4 +134,19 @@ main { flex: 1; min-height: 0; padding: 12px; }
 .armed-hint { font-size: 13px; color: var(--accent); font-weight: 600; }
 .full { display: flex; flex-direction: column; }
 .full > * { flex: 1; }
+
+@media (max-width: 700px) {
+  .app { height: 100dvh; }
+  header { flex-wrap: wrap; gap: 8px 12px; padding: 8px 12px; }
+  h1 { font-size: 17px; }
+  nav { order: 1; width: 100%; overflow-x: auto; }
+  .actions { margin-left: 0; }
+  main { padding: 8px; }
+}
+
+@media print {
+  .app { height: auto; }
+  header { display: none; }
+  main { padding: 0; }
+}
 </style>

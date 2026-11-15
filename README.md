@@ -53,6 +53,8 @@ Open daarna de URL die Vite toont (standaard http://localhost:5173).
 - Elke soort zet je aan of uit met de knoppen in de legenda.
 - Filters: **Alleen gewassen in mijn plan**, en **Alleen gewassen met activiteit van … t/m …** (een vrij te kiezen periode, ook over de jaargrens).
 - De maandkop blijft bovenaan staan als je scrolt.
+- **PDF / printen**: maakt een printversie van de kalender met de filters die aanstaan. Kies in het printvenster *Opslaan als PDF* om hem op je telefoon te zetten.
+- Op een telefoon opent de app meteen de zaaikalender, in een smalle opmaak.
 
 ### Gewassen
 

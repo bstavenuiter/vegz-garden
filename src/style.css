@@ -60,3 +60,9 @@ select {
   color: var(--ink);
   width: 100%;
 }
+
+@page { margin: 12mm; }
+@media print {
+  body { background: white; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

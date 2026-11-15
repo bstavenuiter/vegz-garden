@@ -22,6 +22,8 @@ function toggleKind(key: KindKey) {
   else if (activeKinds.value.length > 1) activeKinds.value = activeKinds.value.filter((k) => k !== key)
 }
 
+const print = () => window.print()
+
 const crops = computed(() => {
   const mine = new Set(state.plantings.map((p) => p.cropId))
   return CROPS.filter((c) => !onlyMine.value || mine.has(c.id))
@@ -59,7 +61,9 @@ const crops = computed(() => {
           <i :class="k.key" /> {{ k.label.toLowerCase() }}
         </button>
       </div>
+      <button class="print-button" @click="print">PDF / printen</button>
     </div>
+    <h2 class="print-title">🥕 Zaaikalender</h2>
     <p v-if="state.soil === 'klei'" class="clay-note">
       🟫 Kleigrond: zaai en plant buiten in het voorjaar liefst 1–2 weken later dan de kalender aangeeft. In de kas maakt het niet uit.
     </p>
@@ -107,4 +111,27 @@ const crops = computed(() => {
 .name { font-size: 14px; }
 .clay-note { margin: -4px 0 8px; font-size: 12px; color: var(--muted); }
 .empty { color: var(--muted); }
+.print-title { display: none; }
+
+@media (max-width: 700px) {
+  .calendar { padding: 8px 10px; border-radius: 8px; }
+  .toolbar { gap: 8px; }
+  .window-filter { flex-wrap: wrap; }
+  .legend { margin-left: 0; flex-wrap: wrap; }
+  .head-row, .crop-row { grid-template-columns: 105px 1fr; gap: 6px; }
+  .head-row { top: -8px; }
+  .name { font-size: 13px; }
+  .months { font-size: 9px; }
+}
+
+@media print {
+  .calendar { height: auto; overflow: visible; padding: 0; background: none; border-radius: 0; }
+  .print-title { display: block; margin: 0 0 6px; }
+  .toolbar { margin-bottom: 6px; }
+  .toolbar > label, .print-button, .legend button.off { display: none; }
+  .legend { margin-left: 0; }
+  .legend button { border: none; background: none; padding: 0 10px 0 0; }
+  .head-row { position: static; }
+  .crop-row { break-inside: avoid; }
+}
 </style>
